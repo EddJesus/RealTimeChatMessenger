@@ -8,12 +8,9 @@ import {
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
-import CookieService from '../../services/CookieService';
-
+let token;
 axios.interceptors.request.use(async function (config) {
-  const token = await CookieService.getCookie("messenger-token");
   config.headers["x-access-token"] = token;
-
   return config;
 });
 
@@ -37,6 +34,7 @@ export const fetchUser = () => async (dispatch) => {
 export const register = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/register", credentials, { withCredentials: true });
+    token = data.token;
     dispatch(gotUser(data));
     socket.emit("go-online", data.id);
   } catch (error) {
@@ -48,6 +46,7 @@ export const register = (credentials) => async (dispatch) => {
 export const login = (credentials) => async (dispatch) => {
   try {
     const { data } = await axios.post("/auth/login", credentials, { withCredentials: true });
+    token = data.token;
     dispatch(gotUser(data));
     socket.emit("go-online", data.id);
   } catch (error) {
