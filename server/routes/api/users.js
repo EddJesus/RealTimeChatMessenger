@@ -11,6 +11,9 @@ router.get("/:username", async (req, res, next) => {
     }
     const { username } = req.params;
 
+    console.log("caiu aqui ----------------------------------------------------")
+    console.log(username)
+
     const users = await User.findAll({
       where: {
         username: {

@@ -8,10 +8,6 @@ class CookieService {
     return cookie.get(key);
   }
 
-  setCookie(key, value, options) {
-    cookie.set(key, value, options);
-  }
-
   remove(key) {
     cookie.remove(key);
   }

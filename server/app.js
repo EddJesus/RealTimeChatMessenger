@@ -16,15 +16,17 @@ const { json, urlencoded } = express;
 
 const app = express();
 
-app.use(cookieParser());
-app.use(cors());
+app.use(cors({ credential: true, origin: "http://localhost:3000" }));
 app.use(logger("dev"));
 app.use(json());
+app.use(cookieParser());
 app.use(urlencoded({ extended: false }));
 app.use(express.static(join(__dirname, "public")));
 
 app.use(function (req, res, next) {
   const token = req.headers["x-access-token"];
+  console.log("caiu aqui ----------------------------- APP.JS")
+  console.log(token)
   if (token) {
     jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
       if (err) {

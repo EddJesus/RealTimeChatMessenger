@@ -36,8 +36,7 @@ export const fetchUser = () => async (dispatch) => {
 
 export const register = (credentials) => async (dispatch) => {
   try {
-    const { data } = await axios.post("/auth/register", credentials);
-    await CookieService.setCookie("messenger-token", data.token)
+    const { data } = await axios.post("/auth/register", credentials, { withCredentials: true });
     dispatch(gotUser(data));
     socket.emit("go-online", data.id);
   } catch (error) {
@@ -48,8 +47,7 @@ export const register = (credentials) => async (dispatch) => {
 
 export const login = (credentials) => async (dispatch) => {
   try {
-    const { data } = await axios.post("/auth/login", credentials);
-    await CookieService.setCookie("messenger-token", data.token)
+    const { data } = await axios.post("/auth/login", credentials, { withCredentials: true });
     dispatch(gotUser(data));
     socket.emit("go-online", data.id);
   } catch (error) {
@@ -60,8 +58,7 @@ export const login = (credentials) => async (dispatch) => {
 
 export const logout = (id) => async (dispatch) => {
   try {
-    await axios.delete("/auth/logout");
-    await CookieService.remove("messenger-token")
+    await axios.delete("/auth/logout", { withCredentials: true });
     dispatch(gotUser({}));
     socket.emit("logout", id);
   } catch (error) {
