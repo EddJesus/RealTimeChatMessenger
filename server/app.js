@@ -1,5 +1,7 @@
 const createError = require("http-errors");
 const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const { join } = require("path");
 const logger = require("morgan");
 const jwt = require("jsonwebtoken");
@@ -14,6 +16,8 @@ const { json, urlencoded } = express;
 
 const app = express();
 
+app.use(cookieParser());
+app.use(cors());
 app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
