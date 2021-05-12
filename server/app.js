@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
 const createError = require("http-errors");
 const express = require("express");
 const cors = require("cors");
@@ -25,8 +27,6 @@ app.use(express.static(join(__dirname, "public")));
 
 app.use(function (req, res, next) {
   const token = req.headers["x-access-token"];
-  console.log("caiu aqui ----------------------------- APP.JS")
-  console.log(token)
   if (token) {
     jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
       if (err) {
