@@ -2,7 +2,7 @@ import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
 
 let defaultTheme = createMuiTheme({
   typography: {
-    fontFamily: "OpenSans - semibold, regular",
+    fontFamily: "OpenSans, sans serif",
     button: {
       textTransform: "none",
       letterSpacing: 0,
@@ -14,8 +14,11 @@ let defaultTheme = createMuiTheme({
       input: {
         fontWeight: "bold",
         marginTop: "20px",
-        minWidth: "400px",
-        maxWidth: "600px",
+      }
+    }, MuiTextField:{
+      root : {
+        width: "40vw",
+        minWidth: "160px"
       }
     }
   },

@@ -22,17 +22,18 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
   },
-  bannerContainer:{
+  bannerContainer: {
+    minWidth: "300px",
     width: "35vw",
     [theme.breakpoints.down("xs")]: {
-      width: "0vw"
+      display: "none",
     },
     height: "100%",
   },
   formContainer: {
-    width: "65vw",
+    width: "50vw",
     [theme.breakpoints.down("xs")]: {
-      width: "80vw"
+      width: "100vw"
     },
     height: "100%",
     display: "flex",
@@ -46,7 +47,26 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     flexDirection: "column",
   },
-  registerButton: {
+  headerWrapper: {
+    [theme.breakpoints.down("sm")]: {
+      width: "75vw",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100vw",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  },
+  loginText: {
+    marginBottom: "30px"
+  },
+  loginButton: {
     boxShadow: `0px 0px 5px 5px ${theme.palette.secondary.light}`,
     padding: "15px 25px 15px 25px",
     marginTop: "50px",
@@ -65,6 +85,11 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "150px",
     color: "#FFFF",
     marginTop: "40px"
+  },
+  inputs: {
+    width: "70vw",
+    display: "flex",
+    justifyContent: "center"
   }
 }));
 
@@ -95,20 +120,20 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center" style={{height: "100%"}}>
+    <Grid container justify="center" style={{ height: "100%" }}>
       <Box className={classes.wrapper}>
         <Box className={classes.bannerContainer}>
           <LinearGradientBanner />
         </Box>
         <Box className={classes.formContainer}>
-          <Grid container item justify="flex-end">
+          <Grid container item justify="flex-end" className={classes.headerWrapper}>
             <Typography variant="body1" noWrap className={classes.descriptionTexts}>Need to log in?</Typography>
-            <Button color="primary" size="large" className={classes.registerButton} onClick={() => history.push("/login")}>Login</Button>
+            <Button color="primary" size="large" className={classes.loginButton} onClick={() => history.push("/login")}>Login</Button>
           </Grid>
           <form onSubmit={handleRegister}>
             <Grid container item className={classes.form}>
-              <Grid >
-                <Typography style={{ marginBottom: "30px" }} variant="h5">Create an account.</Typography>
+                <Typography className={classes.loginText} variant="h5">Create an account.</Typography>
+              <Grid className={classes.inputs}>
                 <FormControl margin="normal" required>
                   <TextField
                     aria-label="username"
@@ -116,10 +141,11 @@ const Login = (props) => {
                     name="username"
                     type="text"
                     required
+                    InputLabelProps={{ required: false }}
                   />
                 </FormControl>
               </Grid>
-              <Grid>
+              <Grid className={classes.inputs}>
                 <FormControl margin="normal" required>
                   <TextField
                     label="E-mail address"
@@ -127,10 +153,11 @@ const Login = (props) => {
                     type="email"
                     name="email"
                     required
+                    InputLabelProps={{ required: false }}
                   />
                 </FormControl>
               </Grid>
-              <Grid>
+              <Grid className={classes.inputs}>
                 <FormControl margin="normal" required error={!!formErrorMessage.confirmPassword}>
                   <TextField
                     aria-label="password"
@@ -139,13 +166,14 @@ const Login = (props) => {
                     inputProps={{ minLength: 6 }}
                     name="password"
                     required
+                    InputLabelProps={{ required: false }}
                   />
                   <FormHelperText>
                     {formErrorMessage.confirmPassword}
                   </FormHelperText>
                 </FormControl>
               </Grid>
-              <Grid>
+              <Grid className={classes.inputs}>
                 <FormControl margin="normal" required error={!!formErrorMessage.confirmPassword}>
                   <TextField
                     label="Confirm Password"
@@ -154,6 +182,7 @@ const Login = (props) => {
                     inputProps={{ minLength: 6 }}
                     name="confirmPassword"
                     required
+                    InputLabelProps={{ required: false }}
                   />
                   <FormHelperText>
                     {formErrorMessage.confirmPassword}

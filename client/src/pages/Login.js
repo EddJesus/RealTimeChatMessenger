@@ -22,18 +22,19 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
   },
   bannerContainer:{
+    minWidth: "300px",
     width: "35vw",
     [theme.breakpoints.down("xs")]: {
-      width: "0vw"
+      display: "none"
     },
     height: "100%",
   },
   formContainer: {
-    height: "100%",
-    width: "65vw",
+    width: "50vw",
     [theme.breakpoints.down("xs")]: {
-      width: "80vw"
+      width: "100vw"
     },
+    height: "100%",
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
@@ -44,6 +45,25 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     alignItems: "center",
     flexDirection: "column",
+  },
+  headerWrapper: {
+    [theme.breakpoints.down("sm")]: {
+      width: "75vw",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100vw",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  },
+  registerText:{
+    marginBottom: "30px"
   },
   registerButton: {
     boxShadow: `0px 0px 5px 5px ${theme.palette.secondary.light}`,
@@ -64,6 +84,11 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "150px",
     color: "#FFFF",
     marginTop: "40px"
+  },
+  inputs: {
+    width: "70vw",
+    display: "flex",
+    justifyContent: "center"
   }
 }));
 
@@ -92,14 +117,14 @@ const Login = (props) => {
           <LinearGradientBanner />
         </Box>
         <Box className={classes.formContainer}>
-          <Grid container item justify="flex-end">
+          <Grid container item justify="flex-end" className={classes.headerWrapper}>
             <Typography variant="body1" noWrap className={classes.descriptionTexts}>Don't have an account?</Typography>
             <Button color="primary" size="large" className={classes.registerButton} onClick={() => history.push("/register")}>Create account</Button>
           </Grid>
           <form onSubmit={handleLogin}>
             <Grid container item className={classes.form}>
-              <Grid>
-              <Typography style={{ marginBottom: "30px" }} variant="h5">Welcome back!</Typography>
+              <Typography className={classes.registerText} variant="h5">Welcome back!</Typography>
+              <Grid className={classes.inputs}>
                 <FormControl margin="normal" required>
                   <TextField
                     aria-label="username"
@@ -109,13 +134,14 @@ const Login = (props) => {
                   />
                 </FormControl>
               </Grid>
-              <Grid>
+              <Grid className={classes.inputs}>
                 <FormControl margin="normal" required>
                   <TextField
                     label="Password"
                     aria-label="password"
                     type="password"
                     name="password"
+
                   />
                 </FormControl>
               </Grid>

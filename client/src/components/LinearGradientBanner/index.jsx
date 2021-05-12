@@ -10,6 +10,7 @@ const useStyles = makeStyles(() => ({
   wrapper: {
     height: "100%",
     width: "35vw",
+    minWidth: "300px",
     display: "flex",
     position: "fixed",
     justifyContent: "center",
@@ -19,7 +20,11 @@ const useStyles = makeStyles(() => ({
     backgroundImage: `linear-gradient(to top, rgba(134, 185, 255, 0.85),rgba(58, 141, 255, 0.85) ), url(${bannerImage})`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "100% 100%",
-  },
+  }, 
+  bannerText :{
+    color: "white",
+    marginTop: "20px",
+  }
 }));
 
 const LinearGradientBanner = (props) => {
@@ -32,7 +37,7 @@ const LinearGradientBanner = (props) => {
   return (
     <Box className={classes.wrapper}>
       <ChatIcon />
-      <Typography variant="h5" style={{ color: "white", marginTop: "20px" }}>
+      <Typography variant={props.width === 'md' ? "h5" : "h4"} className={classes.bannerText}>
         Converse with anyone <br />
         with any language
       </Typography>
