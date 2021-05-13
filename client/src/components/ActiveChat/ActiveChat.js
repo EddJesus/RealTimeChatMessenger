@@ -6,16 +6,18 @@ import { connect } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {
+    maxWidth: "70vw",
     display: "flex",
     flexGrow: 8,
     flexDirection: "column",
-    maxHeight: "100%"
+    maxHeight: "100%",
   },
   chatContainer: {
     marginLeft: 41,
     paddingRight: 10,
     display: "flex",
     overflowY: "scroll",
+    overflowX: "hidden",
     flexDirection: "column",
     flexGrow: 1,
     justifyContent: "space-between"
