@@ -1,5 +1,9 @@
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' });
 const createError = require("http-errors");
 const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const { join } = require("path");
 const logger = require("morgan");
 const jwt = require("jsonwebtoken");
@@ -14,13 +18,16 @@ const { json, urlencoded } = express;
 
 const app = express();
 
+app.use(cors({ credential: true, origin: "http://localhost:3000" }));
 app.use(logger("dev"));
 app.use(json());
+app.use(cookieParser());
 app.use(urlencoded({ extended: false }));
 app.use(express.static(join(__dirname, "public")));
 
 app.use(function (req, res, next) {
-  const token = req.headers["x-access-token"];
+
+  const token = req.cookies["messenger-token"];
   if (token) {
     jwt.verify(token, process.env.SESSION_SECRET, (err, decoded) => {
       if (err) {
