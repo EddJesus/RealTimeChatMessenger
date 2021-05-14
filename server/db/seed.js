@@ -1,7 +1,11 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const db = require("./db");
 const { User } = require("./models");
 const Conversation = require("./models/conversation");
 const Message = require("./models/message");
+
+console.log(process.env.DATABASE_URL);
 
 async function seed() {
   await db.sync({ force: true });
