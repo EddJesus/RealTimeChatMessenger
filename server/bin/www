@@ -41,9 +41,9 @@ io.on("connection", (socket) => {
   });
 
   socket.on("new-message", (data) => {
-    socket.broadcast.emit("new-message", {
+    onlineUsers[data.message.senderId, data.recipientId].socket.broadcast.emit("new-message", {
       message: data.message,
-      sender: data.sender,
+      sender: data.message.senderId,
     });
   });
 
