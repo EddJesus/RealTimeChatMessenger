@@ -4,10 +4,16 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    flexWrap: "wrap",
+    minWidth: 0,
     display: "flex",
     justifyContent: "space-between",
     marginLeft: 20,
     flexGrow: 1,
+  },
+  previewLine: {
+    flexWrap: "wrap",
+    minWidth: 0,
   },
   username: {
     fontWeight: "bold",
@@ -17,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 12,
     color: "#9CADC8",
     letterSpacing: -0.17,
+    maxWidth: "100%",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis"
   },
   notification: {
     height: 20,
@@ -42,7 +52,7 @@ const ChatContent = (props) => {
 
   return (
     <Box className={classes.root}>
-      <Box>
+      <Box className={classes.previewLine}>
         <Typography className={classes.username}>
           {otherUser.username}
         </Typography>

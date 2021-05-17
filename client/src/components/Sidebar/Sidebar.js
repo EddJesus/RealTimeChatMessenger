@@ -8,7 +8,10 @@ const useStyles = makeStyles(() => ({
   root: {
     paddingLeft: 21,
     paddingRight: 21,
-    flexGrow: 1
+    flexGrow: 1,
+    overflowY: "auto",
+    maxWidth: "30vw",
+    maxHeight: "100%",
   },
   title: {
     fontSize: 20,

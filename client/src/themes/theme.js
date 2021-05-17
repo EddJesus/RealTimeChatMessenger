@@ -2,7 +2,7 @@ import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
 
 let defaultTheme = createMuiTheme({
   typography: {
-    fontFamily: "OpenSans, sans serif",
+    fontFamily: "Open Sans, sans serif",
     button: {
       textTransform: "none",
       letterSpacing: 0,

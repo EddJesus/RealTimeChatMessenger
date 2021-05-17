@@ -6,7 +6,7 @@ const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
   },
   date: {
     fontSize: 11,
@@ -23,7 +23,8 @@ const useStyles = makeStyles(() => ({
   },
   bubble: {
     background: "#F4F6FA",
-    borderRadius: "10px 10px 0 10px"
+    borderRadius: "10px 10px 0 10px",
+    maxWidth: "70%",
   }
 }));
 
