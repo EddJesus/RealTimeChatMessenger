@@ -79,4 +79,32 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.put("/check", async (req, res, next) => {
+  try {
+    if (!req.user) {
+      return res.sendStatus(401);
+    }
+
+    const { conversationId } = req.body;
+
+    Message.update(
+      { read: true },
+      { 
+        where: { 
+          read: false, 
+          conversationId: conversationId,
+          senderId: {
+            [Op.not]: req.user.id,
+          },
+        } 
+      }
+    ).then(function () {
+        res.status(200);
+      })
+
+  } catch (error) {
+    next(error);
+  }
+})
+
 module.exports = router;
