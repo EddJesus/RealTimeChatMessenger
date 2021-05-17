@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
@@ -6,14 +6,18 @@ import { connect } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {
+    maxWidth: "70vw",
     display: "flex",
     flexGrow: 8,
-    flexDirection: "column"
+    flexDirection: "column",
+    maxHeight: "100%",
   },
   chatContainer: {
     marginLeft: 41,
-    marginRight: 41,
+    paddingRight: 10,
     display: "flex",
+    overflowY: "scroll",
+    overflowX: "hidden",
     flexDirection: "column",
     flexGrow: 1,
     justifyContent: "space-between"
@@ -21,9 +25,27 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ActiveChat = (props) => {
+  const [conversation, setConversation]= useState({})
+  const [messages, updateMessages] = useState([])
+  
   const classes = useStyles();
+
+  const body = useRef()
+
   const { user } = props;
-  const conversation = props.conversation || {};
+
+  useEffect(() => {
+    if(props.conversation !== undefined){
+      setConversation(props.conversation)
+      updateMessages(props.conversation.messages)
+    }
+    // set the scroll to the end
+    if (body.current) {
+      if (body.current.scrollHeight > body.current.offsetHeight) {
+        body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight
+      }
+    }
+  }, [props.conversation, messages, conversation]);
 
   return (
     <Box className={classes.root}>
@@ -33,18 +55,18 @@ const ActiveChat = (props) => {
             username={conversation.otherUser.username}
             online={conversation.otherUser.online || false}
           />
-          <Box className={classes.chatContainer}>
+          <Box ref={body} className={classes.chatContainer}>
             <Messages
-              messages={conversation.messages}
+              messages={messages}
               otherUser={conversation.otherUser}
               userId={user.id}
             />
-            <Input
-              otherUser={conversation.otherUser}
-              conversationId={conversation.id}
-              user={user}
-            />
           </Box>
+          <Input
+            otherUser={conversation.otherUser}
+            conversationId={conversation.id}
+            user={user}
+          />
         </>
       )}
     </Box>
