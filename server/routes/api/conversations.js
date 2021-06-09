@@ -61,8 +61,13 @@ router.get("/", async (req, res, next) => {
         delete convoJSON.user2;
       }
 
+      function searchUser(arr) {
+        const exist = arr.some(socket => socket.id === convoJSON.otherUser.id)
+        return exist;
+      }
+
       // set property for online status of the other user
-      if (onlineUsers.includes(convoJSON.otherUser.id)) {
+      if (searchUser(onlineUsers)) {
         convoJSON.otherUser.online = true;
       } else {
         convoJSON.otherUser.online = false;
