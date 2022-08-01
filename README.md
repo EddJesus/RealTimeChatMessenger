@@ -3,8 +3,7 @@ repo name: RealTimeChatMessenger
 description: Project developed to pass a code test
 github name: EddJesus
 link: https://github.com/EddJesus/RealTimeChatMessenger
-logo path: public/logo.png
-screenshot: public/ss.png
+logo path: client/public/logo.png
 twitter: https://twitter.com/EdJesuus
 email: edusanto22@gmail.com
 -->
@@ -13,7 +12,7 @@ email: edusanto22@gmail.com
 <br />
 <p align="center">
   <a href="https://github.com/EddJesus/RealTimeChatMessenger">
-    <img src="public/logo.png" alt="Logo" width="80" height="80">
+    <img src="client/public/logo.png" alt="Logo" width="80" height="80">
   </a>
   <h2 align="center">
     RealTimeChatMessenger
@@ -82,6 +81,8 @@ Client-side:
 - Have node and npm on your machine
 - Have docker or have postgres on your machine
 
+<br>
+
 ## Installation
 
 ### 1. Run
@@ -110,7 +111,7 @@ npm install
 
 <br>
 
-### 3. create a `.env` using the `.env.example` and your own credentials
+### 3. create a `.env` using the `.env.example` and your own credentials (OBS: you must set PORT as 3001)
 
 <br>
 
@@ -175,6 +176,10 @@ npm start
 <br>
 
 <!-- CONTRIBUTING -->
+
+## Usage
+
+After running the server and the client correctly, just open the client and there you must know what to do 😉! Play!
 
 ## Contributing
 
